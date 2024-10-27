@@ -8,10 +8,10 @@ const userSchema = new mongoose.Schema({
   dob: {
     type: String,
     trim: true,
+    required: false,
   },
   email: {
     type: String,
-    unique: true,
     lowercase: true,
     trim: true,
   },
