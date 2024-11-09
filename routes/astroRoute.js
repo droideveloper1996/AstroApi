@@ -29,6 +29,34 @@ const s3 = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
+router.get("/", async (req, res) => {
+  try {
+    const astrologers = await Astrologer.find().select("-password"); // Exclude password from response
+    res.status(200).json(astrologers);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching astrologers", error: error.message });
+  }
+});
+
+// Get a specific astrologer by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const astrologer = await Astrologer.findById(id).select("-password"); // Exclude password from response
+    if (!astrologer) {
+      return res.status(404).json({ message: "Astrologer not found" });
+    }
+    res.status(200).json(astrologer);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching astrologer", error: error.message });
+  }
+});
+
 // Register Astrologer
 router.post("/register", async (req, res) => {
   const { name, specialization, experience, email, mobileNumber, password } =
@@ -100,34 +128,6 @@ router.post("/rate/:astrologerId", async (req, res) => {
     res
       .status(500)
       .json({ message: "Error updating rating", error: error.message });
-  }
-});
-
-router.get("/", async (req, res) => {
-  try {
-    const astrologers = await Astrologer.find().select("-password"); // Exclude password from response
-    res.status(200).json(astrologers);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching astrologers", error: error.message });
-  }
-});
-
-// Get a specific astrologer by ID
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const astrologer = await Astrologer.findById(id).select("-password"); // Exclude password from response
-    if (!astrologer) {
-      return res.status(404).json({ message: "Astrologer not found" });
-    }
-    res.status(200).json(astrologer);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching astrologer", error: error.message });
   }
 });
 
