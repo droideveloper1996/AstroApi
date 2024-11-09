@@ -29,7 +29,7 @@ const s3 = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
-router.get("/", async (req, res) => {
+router.get("/getAllAstrologer", async (req, res) => {
   try {
     const astrologers = await Astrologer.find().select("-password"); // Exclude password from response
     res.status(200).json(astrologers);
