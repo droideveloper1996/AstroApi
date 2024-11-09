@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const authRoutes = require("./routes/auth");
+const astroRoutes = require("./routes/astroRoute.js");
 const userRoutes = require("./routes/userRoute");
 const feedbackRoutes = require("./routes/feedback.js");
 const predictionRoutes = require("./routes/prediction.js");
@@ -23,6 +24,7 @@ mongoose
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/astro", astroRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/predictions", predictionRoutes);
 
