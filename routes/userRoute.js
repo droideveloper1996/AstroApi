@@ -14,11 +14,9 @@ router.put("/profile/:userId", async (req, res) => {
       { name, email, dateOfBirth, gender, mobileNumber, profilePicture },
       { new: true, runValidators: true } // `new: true` returns the updated document
     );
-
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-
     res.status(200).json({
       message: "Profile updated successfully",
       user: updatedUser,
