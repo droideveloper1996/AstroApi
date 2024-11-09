@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  profilePicture: {
+    type: String,
+    required: false,
+    default: null,
+  },
 });
 
 module.exports = mongoose.model("AstroUser", userSchema);

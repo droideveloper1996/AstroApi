@@ -1,11 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+dotenv.config();
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoute");
-const astroRoutes = require("./routes/astroRoute");
-
-dotenv.config();
+const feedbackRoutes = require("./routes/feedback.js");
 
 const app = express();
 app.use(express.json());
@@ -19,10 +18,11 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Could not connect to MongoDB:", error));
 
-// Routes
+// Routesconst AWS = require('aws-sdk');
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/astro", astroRoutes);
+app.use("/api/feedback", feedbackRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

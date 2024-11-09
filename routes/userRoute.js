@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/UserModel");
-
+const dotenv = require("dotenv");
+dotenv.config();
 router.put("/profile/:userId", async (req, res) => {
   const { userId } = req.params;
-  const { name, email, dateOfBirth, gender } = req.body;
+  const { name, email, dateOfBirth, gender, mobileNumber, profilePicture } =
+    req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { name, email, dateOfBirth, gender },
+      { _id: userId },
+      { name, email, dateOfBirth, gender, mobileNumber, profilePicture },
       { new: true, runValidators: true } // `new: true` returns the updated document
     );
 

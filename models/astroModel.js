@@ -44,6 +44,17 @@ const astrologerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  profilePicture: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  feedback: [
+    {
+      rating: Number,
+      feedback: String,
+    },
+  ],
 });
 
 // Method to calculate average rating
