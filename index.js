@@ -5,6 +5,7 @@ dotenv.config();
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/userRoute");
 const feedbackRoutes = require("./routes/feedback.js");
+const predictionRoutes = require("./routes/prediction.js");
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api/predictions", predictionRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
